@@ -142,6 +142,9 @@ function widget_cardoza_3d_tagcloud($args){
 				'orderby' 		=> 'count',
 				'hide_empty' 	=> 0
 			));
+
+	
+
 	if(sizeof($tags_list)!=0){
 		$max_count = 0;
         if(!empty($option_value['height'])) $canvas_height = $option_value['height'];
@@ -152,13 +155,14 @@ function widget_cardoza_3d_tagcloud($args){
 		else $canvas_bgcolor = "FFFFFF";
 		
 		
-		foreach($tags_list as $tag) if($tag->count > $max_count) $max_count = $tag->count;?>
+		foreach($tags_list as $tag) if($tag->count > $max_count) $max_count = $tag->count;  ?>
+
 		<div id="myCanvasContainer" style="background-color:#<?php echo $canvas_bgcolor;?>;">
 			<canvas width="<?php echo $canvas_width;?>" height="<?php echo $canvas_height;?>" id="myCanvas" >
 				<p>Anything in here will be replaced on browsers that support the canvas element</p>
 			</canvas>
         </div>
-        <div id="tags">
+        <div id="tags" >
                 
 		<ul style="
 		font-family: <?php if(!empty($option_value['font_name'])) echo $option_value['font_name'];
@@ -179,12 +183,25 @@ function widget_cardoza_3d_tagcloud($args){
 		if(empty($option_value['max_font_size'])) $option_value['max_font_size'] = 40;
 		if(empty($option_value['min_font_size'])) $option_value['max_font_size'] = 3;
 		$i=1;
+
+		
+		
 		foreach($tags_list as $tag){
+
+			$pid = $wpdb->get_var( "SELECT object_id FROM $wpdb->term_relationships where term_taxonomy_id='".$tag->term_id."'" );
+			$ost_thumbnail = get_the_post_thumbnail($pid, array(50,50));
+
+
 			if($i <= $option_value['no_of_tags']){
 			$font_size = $option_value['max_font_size'] - (($max_count - $tag->count)*2);
+
 			if($font_size < $option_value['min_font_size']) $font_size = $option_value['min_font_size'];
 			//echo "<li><a href=/"'.$_SERVER['PHP_SELF'].'?tag='.$tag->slug.'/"><img src='http://localhost/wp3.6/wp-content/uploads/2013/10/Dashbaord.png' height='50px'/></a></li>" ;
-			echo '<li><a href="'.$_SERVER['PHP_SELF'].'?tag='.$tag->slug.'" style="font-size:'.$font_size.'px;color:">'.'<img src='.$tag->description.' height="50px"/>'.'</a></li>';
+			//echo '<li><a href="'.$_SERVER['PHP_SELF'].'?tag='.$tag->slug.'" style="font-size:'.$font_size.'px;color:">'.'<img src='.$tag->description.' height="50px"/>'.'</a></li>';
+			if(!empty($ost_thumbnail))
+				echo '<li><a href="'.$_SERVER['PHP_SELF'].'?tag='.$tag->slug.'" style="font-size:'.$font_size.'px;color:">'.$ost_thumbnail.'</a></li>';
+			else
+				echo '<li><a href="'.$_SERVER['PHP_SELF'].'?tag='.$tag->slug.'" style="font-size:'.$font_size.'px;color:">'.$tag->slug.'</a></li>';
             //echo $tag->description;
             $i++;
 			}
@@ -194,6 +211,8 @@ function widget_cardoza_3d_tagcloud($args){
 	else echo "No tags found";
 	echo $after_widget;
 }
+
+
 function cardoza_3d_tagcloud_init(){
 	load_plugin_textdomain('cardozatagcloud', false, dirname( plugin_basename(__FILE__)).'/languages');
 	wp_register_sidebar_widget('3d_tag_cloud', __('OST 3D Image Cloud'), 'widget_cardoza_3d_tagcloud');
