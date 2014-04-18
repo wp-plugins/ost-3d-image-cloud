@@ -2,7 +2,7 @@
 Contributors: opensourcetech
 Tags: tag, tagcloud, cloud, 3D tagcloud, 3D image cloud tag, OST, image tag
 Requires at least: 3.0
-Tested up to: 3.6.1
+Tested up to: 3.9
 License: GPLv2 or later
 
 Displays your post tags in 3D rotating animation.
