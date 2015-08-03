@@ -28,6 +28,7 @@ Translation is enabled for this plugin. If someone interested in translating thi
 
 For more visit: http://www.opensourcetechnologies.com
 
+<p>For video tutorial : <a href="https://www.youtube.com/watch?v=1bc-a5gsij0&feature=youtu.be">Click here</a></p>
 
 == Installation ==
 
