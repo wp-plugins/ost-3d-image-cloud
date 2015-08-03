@@ -18,7 +18,9 @@ New Configuration options been added to the admin panel. Now the site admin can 
 1. Title of the Tag Cloud.
 2. Number of tags to be displayed.
 3. Height and Width of the widget.
-4. URL of the image per tag
+4. URL of the image per tag.
+
+For video tutorial : <a href="https://www.youtube.com/watch?v=1bc-a5gsij0&feature=youtu.be">Click here</a>
 
 If you have any suggestions or feedback, please post it in the following link.
 
@@ -28,7 +30,7 @@ Translation is enabled for this plugin. If someone interested in translating thi
 
 For more visit: http://www.opensourcetechnologies.com
 
-For video tutorial : <a href="https://www.youtube.com/watch?v=1bc-a5gsij0&feature=youtu.be">Click here</a>
+
 
 == Installation ==
 
